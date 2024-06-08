@@ -12,8 +12,10 @@ import nAtmosphere from '../assets/images/nAtmosphere.png'
 import nRain from '../assets/images/nRain.png'
 import nSnow from '../assets/images/nSnow.png'
 import nThunderstorm from '../assets/images/nThunderstorm.png'
+import errorImage from '../assets/images/errorImage.webp'
 
 import React from 'react'
+
 const Index = {
     dClear,
     dCloud,
@@ -28,8 +30,8 @@ const Index = {
     nAtmosphere,
     nRain,
     nSnow,
-    nThunderstorm
-
+    nThunderstorm,
+    errorImage
 
   };
   

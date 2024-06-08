@@ -1,14 +1,20 @@
 import React from 'react'
+
 import InputBox from '../inputBox/InputBox.jsx'
 import Index from '../index.js';
+import Button from '../button/Button.jsx';
+
 export default function LeftView(props) {
+
     const currentDay = new Date();
     const date = currentDay.toLocaleDateString();
     const time = currentDay.toLocaleTimeString();
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const day = days[currentDay.getDay()];
 
-    const isDay = currentDay.getHours() > props.sunrise && currentDay.getHours() < props.sunset;
+    const isDay = currentDay.getHours() > props.sunrise && currentDay.getHours() < props.sunset; //Variable to store Day mode 
+
+    // This function is for to get weather icon according to  weather
     const getIcon = (isday,id) =>{
         if(isday && id >= 200 && id < 300) return Index.dThunderstorm;
         else if(isday && id >= 300 && id < 500) return Index.dDrizzle;
@@ -29,23 +35,38 @@ export default function LeftView(props) {
   return (
      <>
        <div className='leftContainer'>
-           <InputBox setCity = {props.setCity}/>
-           <div className='iconContainer'>
-             <img className='pic' src={getIcon(isDay,props.iconCode)} alt="" />
-           </div>
-           <div className='tempContainer'>
-               <p className='temp'>{props.temp}°C</p>
-               <p className='desc'>{props.weatherDescription}</p>
-           </div>
+           <InputBox setCity = {props.setCity}getData={props.getData}/> 
+           <Button text={"Search"} getData={props.getData}/>
 
-           <div className='dayContainer'>
-               <p className='date'>{date}</p>
-               <p className='day'>{day}, {time}</p>
-               <p className='shift'>{isDay ? "Day" : "Night"}</p>
-           </div>
+           {props.country ?
+           <>
+              <div className='leftDataContainer'>
+              <div className='iconContainer'>
+                <img className='pic' src={getIcon(isDay,props.iconCode)} alt="" />
+              </div>
+              <div className='tempContainer'>
+                  <p className='temp'>{props.temp}°C</p>
+                  <p className='desc'>{props.weatherDescription}</p>
+              </div>
 
-           <p className='location'>{props.cityNameFromApi}, {props.country}</p>
+              <div className='dayContainer'>
+                  <p className='date'>{date}</p>
+                  <p className='day'>{day}, {time}</p>
+                  <p className='shift'>{isDay ? "Day" : "Night"}</p>
+              </div>
+              <p className='location'>{props.cityNameFromApi}, {props.country}</p>
+              </div>
+           </> 
+            : 
+           <>
+             <img className='errorImage' src={Index.errorImage} alt="" />
+           </>
+           }
+
        </div>
      </>
   )
 }
+
+
+

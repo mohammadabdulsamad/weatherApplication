@@ -10,7 +10,7 @@ export default function RightView(props) {
     <>
       <div className='rightContainer'>
         <div className='btnContainer'>
-            <Button text = {btnText1}/>
+            <span className='today'>Today</span>
         </div>
         <div className="cardContainer">
             <Card cardHeading={"Wind"} cardDescription={props.windSpeed} descriptionUnit={"Km/h"}/>
@@ -19,9 +19,9 @@ export default function RightView(props) {
             <Card cardHeading={"Ground Level"} cardDescription={props.groundLevel} descriptionUnit={"hPa"}/>
             <Card cardHeading={"Pressure"} cardDescription={props.pressure} descriptionUnit={"mb"}/>
             <Card cardHeading={"Sea Level"} cardDescription={props.seaLevel} descriptionUnit={"hPa"}/>
-            <Card cardHeading={"Coordinates"} cardDescription={longitude} cardFooter={latitude}/>
-            <Card cardHeading={"Sun Rise"} cardDescription={props.sunrise} descriptionUnit={"AM"}/>
-            <Card cardHeading={"Sun Set"} cardDescription={props.sunset} descriptionUnit={"PM"}/>
+            <Card cardHeading={"Coordinates"} cardDescription={props.windSpeed ? longitude : "-"} cardFooter={props.windSpeed ? latitude : "-"}/>
+            <Card cardHeading={"Sun Rise"} cardDescription={props.sunrise} descriptionUnit={props.sunrise === "-" ? "" : "AM"}/>
+            <Card cardHeading={"Sun Set"} cardDescription={props.sunset} descriptionUnit={props.sunset === "-" ? "" : "PM"}/>
         </div>
       </div>
     </>
